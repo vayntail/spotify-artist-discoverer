@@ -8,6 +8,10 @@ import * as API from "./services/spotifyService";
 function App() {
   const [token, setToken] = useState();
   const [genres, setGenres] = useState([]);
+  const [artist, setArtist] = useState();
+
+  // setting from children
+  const [selectedGenre, setSelectedGenre] = useState();
 
   useEffect(() => {
     const initializeSpotifyData = async () => {
@@ -27,31 +31,33 @@ function App() {
     initializeSpotifyData();
   }, []);
 
-  // fetch playlist for specific genre
+  // fetch a random artist and their top songs for specific genre
   useEffect(() => {
-    const fetchPlaylist = async () => {
+    const fetchRandomArtist = async () => {
       if (genres.length > 0 && token) {
         const categoryId = genres[1].id; // for now, select the first genre
 
         try {
-          const playlists = await API.fetchPlaylistsFromCategory(
+          const randomArtist = await API.fetchPlaylistsFromCategory(
             categoryId,
             token
           );
-          console.log(playlists);
+
+          console.log(randomArtist);
+          setArtist(randomArtist);
         } catch (error) {
-          console.error("error fetching playlists...", error);
+          console.error("error fetching random artist...", error);
         }
       }
     };
 
-    fetchPlaylist();
-  }, [genres, token]);
+    fetchRandomArtist();
+  }, [selectedGenre]);
 
   return (
     <>
-      <Tags tags={genres} />
-      <ArtistDisplay />
+      <Tags tags={genres} onGenreSelected={setSelectedGenre} />
+      <ArtistDisplay category={selectedGenre} artist={artist} />
     </>
   );
 }

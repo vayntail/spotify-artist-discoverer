@@ -1,5 +1,5 @@
 const CLIENT_ID = import.meta.env.VITE_clientId;
-const CLIENT_SECREET = import.meta.env.VITE_clientSecret;
+const CLIENT_SECRET = import.meta.env.VITE_clientSecret;
 
 // authorization fetch token
 export const fetchToken = async () => {
@@ -11,7 +11,7 @@ export const fetchToken = async () => {
       }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECREET),
+        Authorization: "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET),
       },
     });
     const data = await response.json();
@@ -39,7 +39,7 @@ export const fetchGenres = async (token) => {
   }
 };
 
-// fetch a random artist from a specific category
+// fetch a random artist and their top songs from a specific category
 export const fetchPlaylistsFromCategory = async (categoryId, token) => {
   try {
     // fetch artists in category/genre
@@ -53,9 +53,20 @@ export const fetchPlaylistsFromCategory = async (categoryId, token) => {
     const data = await response.json();
     const artists = data.artists.items;
     const randomIndex = Math.floor(Math.random() * artists.length);
+    const artist = artists[randomIndex];
 
-    // return a random artist
-    return artists[randomIndex];
+    // fetch top songs
+    const responseTracks = await fetch(
+      `https://api.spotify.com/v1/artists/${artist.id}/top-tracks`,
+      {
+        method: "GET",
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    const tracks = await responseTracks.json();
+
+    // return artist and tracks
+    return { artist, tracks };
   } catch (error) {
     console.error("error fetching artists...", error);
     throw error;
