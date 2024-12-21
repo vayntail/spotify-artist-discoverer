@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import Tags from "./components/Tags";
 import "./App.css";
 import ArtistDisplay from "./components/ArtistDisplay";
@@ -35,7 +36,8 @@ function App() {
   useEffect(() => {
     const fetchRandomArtist = async () => {
       if (genres.length > 0 && token) {
-        const categoryId = genres[1].id; // for now, select the first genre
+        const categoryId = genres[1].name; // for now, select the first genre
+        console.log(`category ID: ${categoryId}`);
 
         try {
           const randomArtist = await API.fetchPlaylistsFromCategory(

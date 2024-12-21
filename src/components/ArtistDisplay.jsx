@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
 
+import "./ArtistDisplay.css";
+
 function ArtistDisplay({ category, artist }) {
   const [displaying, setDisplaying] = useState(false);
 
   const handleSearchButtonClick = () => {
     console.log(`search button clicked. current category is: ${category.name}`);
     setDisplaying(true);
+
+    console.log(artist.artist.images[0]);
   };
 
   return (
     <div className="ArtistDisplay">
       {displaying && (
-        <div>
-          <img src="" />
-          <h1>{artist.artist.name}</h1>
-          {artist.tracks.tracks.map((track) => {
-            return <p>{track.name}</p>;
-          })}
+        <div className="display">
+          <img src={artist.artist.images[0].url} />
+          <div>
+            <h1>{artist.artist.name}</h1>
+            {artist.tracks.tracks.map((track, index) => {
+              return <p key={index}>{track.name}</p>;
+            })}
+          </div>
         </div>
       )}
 

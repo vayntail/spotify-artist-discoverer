@@ -40,18 +40,27 @@ export const fetchGenres = async (token) => {
 };
 
 // fetch a random artist and their top songs from a specific category
-export const fetchPlaylistsFromCategory = async (categoryId, token) => {
+export const fetchPlaylistsFromCategory = async (categoryName, token) => {
   try {
+    const params = new URLSearchParams({
+      genre: categoryName, // Your query parameter
+      type: "artist", // Additional query parameters if needed
+    });
+    const str = categoryName.replace(" ", "+");
     // fetch artists in category/genre
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=genre=${categoryId}&type=artist`,
+      `https://api.spotify.com/v1/search?q=${params.toString()}`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
       }
     );
+
     const data = await response.json();
     const artists = data.artists.items;
+    // test
+    console.log(data);
+
     const randomIndex = Math.floor(Math.random() * artists.length);
     const artist = artists[randomIndex];
 
