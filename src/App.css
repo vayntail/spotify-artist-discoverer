@@ -2,21 +2,6 @@ body {
   background-color: rgb(149, 149, 218);
 }
 
-.Tags {
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  position: absolute;
-}
-
-.Tag {
-  background-color: rgb(240, 215, 215);
-  border-radius: 3px;
-  padding: 12px;
-  cursor: pointer;
-}
-
 .ArtistDisplay {
   display: flex;
   justify-content: center;

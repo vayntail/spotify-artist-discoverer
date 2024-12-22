@@ -28,7 +28,9 @@ function ArtistDisplay({ category, artist }) {
 
       <div className="search">
         <h1>find an artist</h1>
-        <button onClick={handleSearchButtonClick}>search!</button>
+        <button onClick={handleSearchButtonClick}>
+          <img src="/refresh.svg" />
+        </button>
       </div>
     </div>
   );

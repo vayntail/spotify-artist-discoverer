@@ -1,0 +1,33 @@
+.Tags ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  position: absolute;
+}
+
+.tag-button {
+  font-size: 14px;
+  color: rgb(49, 25, 25);
+  padding: 12px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(240, 215, 215);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.tag-button:hover {
+  background-color: rgb(240, 187, 187);
+  font-weight: bold;
+}
+
+.tag-button:active {
+  background-color: rgb(240, 187, 187);
+}
+
+.active {
+  background-color: rgb(240, 187, 187);
+  font-weight: bold;
+}
