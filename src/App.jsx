@@ -35,7 +35,7 @@ function App() {
   // fetch a random artist and their top songs for specific genre
   const fetchRandomArtist = async () => {
     if (genres.length > 0 && token) {
-      const categoryId = genres[1].name; // for now, select the first genre
+      const categoryId = selectedGenre.name; // for now, select the first genre
       console.log(`category ID: ${categoryId}`);
 
       try {

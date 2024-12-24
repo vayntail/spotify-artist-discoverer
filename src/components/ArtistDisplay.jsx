@@ -15,7 +15,7 @@ function ArtistDisplay({ category, artist, onSearchButtonClicked }) {
     <div className="ArtistDisplay">
       {displaying && artist ? (
         <div className="display">
-          <img src={artist.artist.images[0].url} />
+          <img src={artist.artist.images[0].url} height="500" />
           <div>
             <h1>{artist.artist.name}</h1>
             {artist.tracks.tracks.map((track, index) => {
@@ -24,7 +24,7 @@ function ArtistDisplay({ category, artist, onSearchButtonClicked }) {
           </div>
         </div>
       ) : (
-        <h1>find an artist</h1>
+        <h1>choose a genre and find an artist!</h1>
       )}
 
       <div className="search">

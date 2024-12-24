@@ -43,8 +43,8 @@ export const fetchGenres = async (token) => {
 export const fetchPlaylistsFromCategory = async (categoryName, token) => {
   try {
     const params = new URLSearchParams({
-      genre: categoryName, // Your query parameter
-      type: "artist", // Additional query parameters if needed
+      genre: categoryName,
+      type: "artist",
     });
     const str = categoryName.replace(" ", "+");
     // fetch artists in category/genre
