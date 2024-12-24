@@ -33,33 +33,33 @@ function App() {
   }, []);
 
   // fetch a random artist and their top songs for specific genre
-  useEffect(() => {
-    const fetchRandomArtist = async () => {
-      if (genres.length > 0 && token) {
-        const categoryId = genres[1].name; // for now, select the first genre
-        console.log(`category ID: ${categoryId}`);
+  const fetchRandomArtist = async () => {
+    if (genres.length > 0 && token) {
+      const categoryId = genres[1].name; // for now, select the first genre
+      console.log(`category ID: ${categoryId}`);
 
-        try {
-          const randomArtist = await API.fetchPlaylistsFromCategory(
-            categoryId,
-            token
-          );
+      try {
+        const randomArtist = await API.fetchPlaylistsFromCategory(
+          categoryId,
+          token
+        );
 
-          console.log(randomArtist);
-          setArtist(randomArtist);
-        } catch (error) {
-          console.error("error fetching random artist...", error);
-        }
+        console.log(randomArtist);
+        setArtist(randomArtist);
+      } catch (error) {
+        console.error("error fetching random artist...", error);
       }
-    };
-
-    fetchRandomArtist();
-  }, [selectedGenre]);
+    }
+  };
 
   return (
     <>
       <Tags tags={genres} onGenreSelected={setSelectedGenre} />
-      <ArtistDisplay category={selectedGenre} artist={artist} />
+      <ArtistDisplay
+        category={selectedGenre}
+        artist={artist}
+        onSearchButtonClicked={fetchRandomArtist}
+      />
     </>
   );
 }

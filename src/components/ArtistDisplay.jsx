@@ -2,19 +2,18 @@ import { useState, useEffect } from "react";
 
 import "./ArtistDisplay.css";
 
-function ArtistDisplay({ category, artist }) {
+function ArtistDisplay({ category, artist, onSearchButtonClicked }) {
   const [displaying, setDisplaying] = useState(false);
 
   const handleSearchButtonClick = () => {
     console.log(`search button clicked. current category is: ${category.name}`);
     setDisplaying(true);
-
-    console.log(artist.artist.images[0]);
+    onSearchButtonClicked();
   };
 
   return (
     <div className="ArtistDisplay">
-      {displaying && (
+      {displaying && artist ? (
         <div className="display">
           <img src={artist.artist.images[0].url} />
           <div>
@@ -24,10 +23,11 @@ function ArtistDisplay({ category, artist }) {
             })}
           </div>
         </div>
+      ) : (
+        <h1>find an artist</h1>
       )}
 
       <div className="search">
-        <h1>find an artist</h1>
         <button onClick={handleSearchButtonClick}>
           <img src="/refresh.svg" />
         </button>
