@@ -4,7 +4,7 @@ hello! this is a website using [Spotify Web API](https://developer.spotify.com/d
 
 # screenshots:
 
-![screenshot](app\src\assets\screenshot.png)
+![screenshot](src/assets/screenshot.png)
 
 # some struggles:
 
